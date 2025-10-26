@@ -1,9 +1,11 @@
 import 'package:edu_planner/src/presentation/widget/buttons/global_button.dart';
+import 'package:edu_planner/src/service/navigation/routing.dart';
 import 'package:edu_planner/src/utils/assets/app_images.dart';
 import 'package:edu_planner/src/utils/colors/app_colors.dart';
 import 'package:edu_planner/src/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -48,12 +50,14 @@ class _AuthScreenState extends State<AuthScreen> {
             10.h.ph,
             GlobalButton(
               title: "Ro'yxatdan o'tish",
-              onTap: () {},
+              onTap: () {
+                context.push(RoutingConstants.register);
+              },
               type: ButtonType.secondary,
             ),
             40.h.ph,
           ],
-        ).paddingSymmetric(horizontal: 16.w).paddingOnly(top: 30.h),
+        ).paddingSymmetric(horizontal: 38.w).paddingOnly(top: 30.h),
       ),
     );
   }

@@ -57,7 +57,7 @@ extension WrapWidgetExtension on String {
 
   /// Wrap Svg
   Widget assetSvg({Color? color, double? size}) {
-    return SvgPicture.asset(this, colorFilter: color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null, width: size);
+    return SvgPicture.asset(this, colorFilter: color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null, width: size, height: size,);
   }
 
   // Widget networkSvg([Color? color, double? size]) {
