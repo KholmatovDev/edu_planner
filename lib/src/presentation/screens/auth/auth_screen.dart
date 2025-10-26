@@ -44,7 +44,9 @@ class _AuthScreenState extends State<AuthScreen> {
             const Spacer(),
             GlobalButton(
               title: "Kirish",
-              onTap: () {},
+              onTap: () {
+                context.push(RoutingConstants.login);
+              },
               type: ButtonType.filled,
             ),
             10.h.ph,

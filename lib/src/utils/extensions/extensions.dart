@@ -6,6 +6,66 @@ import 'package:flutter/material.dart';
 
 extension StringExtension on String {
   String capitalize() => "${this[0].toUpperCase()}${substring(1)}";
+  String weekday() {
+    switch (this){
+      case "1":
+        return "Dushanba";
+      case "2":
+        return "Seshanba";
+      case "3":
+        return "Chorshanba";
+      case "4":
+        return "Payshanba";
+      case "5":
+        return "Juma";
+      case "6":
+        return "Shanba";
+        case "7":
+        return "Yakshanba";
+      default:
+        return "";
+    }
+  }
+  String monthName() {
+    switch (this) {
+      case "1":
+      case "01":
+        return "Ya";
+      case "2":
+      case "02":
+        return "Fe";
+      case "3":
+      case "03":
+        return "Mart";
+      case "4":
+      case "04":
+        return "Apr";
+      case "5":
+      case "05":
+        return "May";
+      case "6":
+      case "06":
+        return "Iyun";
+      case "7":
+      case "07":
+        return "Iyul";
+      case "8":
+      case "08":
+        return "Avg";
+      case "9":
+      case "09":
+        return "Se";
+      case "10":
+        return "Okt";
+      case "11":
+        return "Noy";
+      case "12":
+        return "Dek";
+      default:
+        return "";
+    }
+  }
+
 
 // String prettyPrice({String? currency, String? pattern}) {
 //   return "${NumberFormat("#,### ${currency ?? ''}").format(num.tryParse(this) ?? 0).replaceAll(RegExp(r',' r''), pattern ?? ' ')} ";

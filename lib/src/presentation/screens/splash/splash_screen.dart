@@ -1,3 +1,5 @@
+import 'package:edu_planner/src/service/api/dio/secure_storage.dart';
+import 'package:edu_planner/src/service/di/di.dart';
 import 'package:edu_planner/src/service/navigation/routing.dart';
 import 'package:edu_planner/src/utils/assets/app_icons.dart';
 import 'package:edu_planner/src/utils/colors/app_colors.dart';
@@ -21,7 +23,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(3.seconds, () {
-      context.push(RoutingConstants.authScreen);
+      if(locator.get<SecureStorage>().getAccess()!=null){
+        context.push(RoutingConstants.home);
+      }else{
+        context.push(RoutingConstants.authScreen);
+      }
     });
   }
 

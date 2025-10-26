@@ -5,7 +5,8 @@ class GlobalButton extends StatefulWidget {
   final String title;
   final VoidCallback? onTap;
   final ButtonType type;
-  const GlobalButton({super.key, required this.title, this.onTap, this.type = ButtonType.filled});
+  final bool isLoading;
+  const GlobalButton({super.key, required this.title, this.onTap, this.type = ButtonType.filled,  this.isLoading = false});
 
   @override
   State<GlobalButton> createState() => _GlobalButtonState();
@@ -38,7 +39,13 @@ class _GlobalButtonState extends State<GlobalButton> {
               alignment: Alignment.center,
               width: double.infinity,
               padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 24.w),
-              child: Text(
+              child:widget.isLoading?SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    color: AppColors.white,
+                    strokeCap: StrokeCap.round,
+                  )) :Text(
                 widget.title,
                 style: TextStyle(
                   color: widget.type == ButtonType.secondary

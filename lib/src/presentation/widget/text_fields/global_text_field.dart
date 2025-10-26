@@ -1,4 +1,3 @@
-import 'package:edu_planner/my_app.dart';
 import 'package:edu_planner/src/utils/assets/app_icons.dart';
 import 'package:edu_planner/src/utils/colors/app_colors.dart';
 import 'package:edu_planner/src/utils/extensions/extensions.dart';
@@ -8,18 +7,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class GlobalTextField extends StatefulWidget {
   final String hint;
   final String icon;
-  const GlobalTextField({super.key, required this.hint, required this.icon});
+  final ValueChanged<String>? onChanged;
+  final TextEditingController controller;
+  final bool isPassword;
+  const GlobalTextField({super.key, required this.hint, required this.icon, this.onChanged, required this.controller, this.isPassword = false});
 
   @override
   State<GlobalTextField> createState() => _GlobalTextFieldState();
 }
 
 class _GlobalTextFieldState extends State<GlobalTextField> {
-  final TextEditingController controller = TextEditingController();
+  bool obSecure = true;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      onChanged: widget.onChanged,
+      controller: widget.controller,
+      obscureText: widget.isPassword&&obSecure,
       onTapOutside: (event) {
         FocusScope.of(context).unfocus();
       },
@@ -29,6 +33,15 @@ class _GlobalTextFieldState extends State<GlobalTextField> {
         fontWeight: FontWeight.w700,
       ),
       decoration: InputDecoration(
+        suffixIcon: widget.isPassword?  GestureDetector(
+          onTap: () {
+            obSecure=!obSecure;
+            setState(() {
+
+            });
+          },
+          child: obSecure? AppIcons.eyeClosed.assetSvg().paddingSymmetric(vertical: 15):AppIcons.eyeOpen.assetSvg().paddingSymmetric(vertical: 15),
+        ):null,
         prefixIcon: widget.icon.assetSvg().paddingSymmetric(vertical: 8.h),
         hintText: widget.hint,
         border: OutlineInputBorder(
