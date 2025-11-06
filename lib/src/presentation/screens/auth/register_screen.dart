@@ -1,3 +1,5 @@
+import 'package:drop_down_list/drop_down_list.dart';
+import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:edu_planner/src/bloc/regions/regions_bloc.dart';
 import 'package:edu_planner/src/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
@@ -44,12 +46,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           bloc: _bloc,
           builder: (context, state) {
             return GlobalButton(
-              title: "Hududni tanlash",
+              title: _page.page ==0?"Hududni tanlash":"Ro'yxatdan o'tish",
               onTap: _canRegister
                   ? () {
+                setState(() {
+
+                });
                       _page.animateToPage(1,
-                          duration: 200.ms,
-                          curve: Curves.fastEaseInToSlowEaseOut);
+                          duration: 200.ms, curve: Curves.fastEaseInToSlowEaseOut);
                     }
                   : null,
             ).opacity(_canRegister ? 1 : 0.4);
@@ -59,6 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: AppColors.primaryGreen,
       body: PageView(
         controller: _page,
+        physics: NeverScrollableScrollPhysics(),
         children: [
           Column(
             children: [
@@ -73,7 +78,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       icon: AppIcons.head,
                       controller: usernameController,
                       onChanged: (value) {
-                        _canRegister = value.length >= 3;
+                        _canRegister = value.length >= 3 &&
+                            passwordController.text == retypePasswordController.text &&
+                            passwordController.text.length >= 6;
                         setState(() {});
                       },
                     ),
@@ -84,8 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: passwordController,
                       isPassword: true,
                       onChanged: (value) {
-                        _canRegister = value == retypePasswordController.text &&
-                            value.length >= 6;
+                        _canRegister = value == retypePasswordController.text && value.length >= 6;
                         setState(() {});
                       },
                     ),
@@ -96,8 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: retypePasswordController,
                       isPassword: true,
                       onChanged: (value) {
-                        _canRegister = value == passwordController.text &&
-                            value.length >= 6;
+                        _canRegister = value == passwordController.text && value.length >= 6;
                         setState(() {});
                       },
                     ),
@@ -117,33 +122,141 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ).globalAnimate(),
                 Text(
-                  "Tizimga kirish uchun maktabni tanlang",
+                  "Tizimga kirish uchun maktabni tanlang🫆",
                   style: 18.semiBold(
                     AppColors.white,
                   ),
                 ).globalAnimate(),
-
-                GestureDetector(
-                  onTap: () {
-                    
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25.w,vertical: 23.h),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(16.r)
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                60.ph,
+                BlocBuilder<RegionsBloc, RegionsState>(
+                  builder: (context, state) {
+                    return Column(
                       children: [
-                        Text(
-                          "Shaxar/Tuman",
-                          style: 16.medium(AppColors.primaryGreen),
+                        GestureDetector(
+                          onTap: () {
+                            DropDownState<String>(
+                              dropDown: DropDown<String>(
+                                data: <SelectedListItem<String>>[
+                                  ...List.generate(
+                                    state.regions?.regions.length ?? 0,
+                                    (index) {
+                                      return SelectedListItem(
+                                        data: state.regions?.regions[index].name ?? "",
+                                      );
+                                    },
+                                  )
+                                ],
+                                onSelected: (selectedItems) {
+                                  List<String> list = [];
+                                  for (var item in selectedItems) {
+                                    list.add(item.data);
+                                  }
+                                  context.read<RegionsBloc>().add(RegionsEvent.setRegion(list.first));
+                                },
+                              ),
+                            ).showModal(context);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 23.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white, borderRadius: BorderRadius.circular(16.r)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  state.selectedRegionName?? "Shaxar/Tuman",
+                                  style: 16.medium(AppColors.primaryGreen),
+                                ),
+                                AppIcons.arrowDown.assetSvg(),
+                              ],
+                            ),
+                          ),
                         ),
-                        AppIcons.arrowDown.assetSvg(),
+                        20.ph,
+                        if(state.selectedRegion!=null) GestureDetector(
+                          onTap: () {
+                            DropDownState<String>(
+                              dropDown: DropDown<String>(
+                                data: <SelectedListItem<String>>[
+                                  ...List.generate(
+                                    state.schools?.schools.length ?? 0,
+                                        (index) {
+                                      return SelectedListItem(
+                                        data: state.schools?.schools[index].name ?? "",
+                                      );
+                                    },
+                                  )
+                                ],
+                                onSelected: (selectedItems) {
+                                  List<String> list = [];
+                                  for (var item in selectedItems) {
+                                    list.add(item.data);
+                                  }
+                                  context.read<RegionsBloc>().add(RegionsEvent.setSchool(list.first));
+                                },
+                              ),
+                            ).showModal(context);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 23.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white, borderRadius: BorderRadius.circular(16.r)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  state.isLoading?"Yuklanmoqda...": state.selectedSchoolName??"Maktab",
+                                  style: 16.medium(AppColors.primaryGreen),
+                                ),
+                                AppIcons.arrowDown.assetSvg(),
+                              ],
+                            ),
+                          ).globalAnimate(),
+                        ),
+                        20.ph,
+                        if(state.selectedSchool!=null) GestureDetector(
+                          onTap: () {
+                            DropDownState<String>(
+                              dropDown: DropDown<String>(
+                                data: <SelectedListItem<String>>[
+                                  ...List.generate(
+                                    state.schools?.schools.length ?? 0,
+                                        (index) {
+                                      return SelectedListItem(
+                                        data: state.schools?.schools[index].name ?? "",
+                                      );
+                                    },
+                                  )
+                                ],
+                                onSelected: (selectedItems) {
+                                  List<String> list = [];
+                                  for (var item in selectedItems) {
+                                    list.add(item.data);
+                                  }
+                                  context.read<RegionsBloc>().add(RegionsEvent.setSchool(list.first));
+                                },
+                              ),
+                            ).showModal(context);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 23.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white, borderRadius: BorderRadius.circular(16.r)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  state.isLoading?"Yuklanmoqda...": state.selectedSchoolName??"Maktab",
+                                  style: 16.medium(AppColors.primaryGreen),
+                                ),
+                                AppIcons.arrowDown.assetSvg(),
+                              ],
+                            ),
+                          ).globalAnimate(),
+                        ),
                       ],
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ],
             ).paddingSymmetric(horizontal: 16.w).paddingOnly(top: 40.h),
