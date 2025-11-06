@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +89,39 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: Column(
               children: [
+                20.ph,
                 ScheduleTab(),
+                12.ph,
+                Container(
+                  width: double.infinity,
+                  height: 1.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.underLine.withOpacity(0.4),
+                  ),
+                ),
+                20.ph,
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Vaqti",
+                          style: TextStyle(
+                              color: AppColors.primaryGreen,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        31.pw,
+                        Text(
+                          "Dars",
+                          style: TextStyle(
+                              color: AppColors.primaryGreen,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    
+                  ],
+                ).paddingSymmetric(horizontal: 31.w)
               ],
             ),
           ).expanded(),

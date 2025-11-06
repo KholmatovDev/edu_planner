@@ -6,4 +6,5 @@ class AppColors {
   static const Color green = Color(0xFF4DC591);
   static const Color underLine = Color(0xFFBCC1CD);
   static const Color black = Color(0xFF000000);
+  static const Color orange = Color(0xFFFF7648);
 }

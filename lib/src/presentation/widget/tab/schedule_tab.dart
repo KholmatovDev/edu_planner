@@ -1,4 +1,6 @@
+import 'package:edu_planner/my_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/colors/app_colors.dart';
 
@@ -19,25 +21,20 @@ class _ScheduleTabState extends State<ScheduleTab> {
         6,
         (index) {
           return Container(
-            child: Column(
-              children: [
-                Text(
-                  _getWeekdayName(index),
-                  style: TextStyle(
-                    color: selectedIndex == index?AppColors.white:AppColors.underLine,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                  ),
-                ),
-                Text(
-                  _getWeekdayName(index),
-                  style: TextStyle(
-                    color: selectedIndex == index?AppColors.white:AppColors.black,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                  ),
-                ),
-              ],
+            padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 13.h),
+            width: 50,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: selectedIndex == index?AppColors.orange:null,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            child: Text(
+              _getWeekdayName(index),
+              style: TextStyle(
+                color: selectedIndex == index?AppColors.white:AppColors.black,
+                fontWeight: FontWeight.w600,
+                fontSize: 20,
+              ),
             ),
           );
         },

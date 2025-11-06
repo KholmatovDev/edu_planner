@@ -1,7 +1,10 @@
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
+
+import '../colors/app_colors.dart';
 
 
 extension StringExtension on String {
@@ -105,6 +108,8 @@ extension WidgetExtension on Widget {
   Widget expanded([int flex = 1]) => Expanded(flex: flex, child: this);
 
   Widget flexible([int flex = 1]) => Flexible(flex: flex, child: this);
+
+  Widget globalAnimate([int delay = 100]) => this.animate().fade(begin: 0,end: 1, delay: delay.ms,duration: 1000.ms).move(begin: Offset(0, -50),end: Offset(0, 0),duration: 400.ms, delay: 100.ms);
 }
 
 extension WrapWidgetExtension on String {
@@ -158,25 +163,25 @@ extension NumExtension on num {
   SizedBox get ph => SizedBox(height: toDouble().h);
   SizedBox get pw => SizedBox(width: toDouble().w);
   /// Text Styles
-  // TextStyle regular({Color? color, String? fontFamily}) {
-  //   return TextStyle(fontSize: toDouble(), color: color ?? AppColors.primaryBlueText, fontFamily: fontFamily??AppFontFamilies.inter, fontWeight: FontWeight.w400);
-  // }
-  //
-  // TextStyle medium({Color? color, String? fontFamily}) {
-  //   return TextStyle(fontSize: toDouble(), color: color ?? AppColors.primaryBlueText, fontFamily: fontFamily??AppFontFamilies.inter, fontWeight: FontWeight.w500);
-  // }
-  //
-  // TextStyle semiBold({Color? color, String? fontFamily}) {
-  //   return TextStyle(fontSize: toDouble(), color: color ?? AppColors.primaryBlueText, fontFamily: fontFamily??AppFontFamilies.inter, fontWeight: FontWeight.w600);
-  // }
-  //
-  // TextStyle bold({Color? color, String? fontFamily}) {
-  //   return TextStyle(fontSize: toDouble(), color: color ?? AppColors.primaryBlueText, fontFamily: fontFamily??AppFontFamilies.inter, fontWeight: FontWeight.w700);
-  // }
-  //
-  // TextStyle extraBold({Color? color, String? fontFamily}) {
-  //   return TextStyle(fontSize: toDouble(), color: color ?? AppColors.primaryBlueText, fontFamily: fontFamily??AppFontFamilies.inter, fontWeight: FontWeight.w800);
-  // }
+  TextStyle regular([Color? color]) {
+    return TextStyle(fontSize: toDouble(), color: color ?? AppColors.black,  fontWeight: FontWeight.w400);
+  }
+
+  TextStyle medium([Color? color]) {
+    return TextStyle(fontSize: toDouble(), color: color ?? AppColors.black,  fontWeight: FontWeight.w500);
+  }
+
+  TextStyle semiBold([Color? color]) {
+    return TextStyle(fontSize: toDouble(), color: color ?? AppColors.black,  fontWeight: FontWeight.w600);
+  }
+
+  TextStyle bold([Color? color]) {
+    return TextStyle(fontSize: toDouble(), color: color ?? AppColors.black,  fontWeight: FontWeight.w700);
+  }
+
+  TextStyle extraBold([Color? color]) {
+    return TextStyle(fontSize: toDouble(), color: color ?? AppColors.black, fontWeight: FontWeight.w800);
+  }
 
 // (String, TextStyle) text99() {
 //   if (this > 99) {
