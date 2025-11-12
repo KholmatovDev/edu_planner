@@ -4,6 +4,7 @@ import 'package:edu_planner/src/presentation/screens/auth/auth_screen.dart';
 import 'package:edu_planner/src/service/api/api_provider/api_provider.dart';
 import 'package:edu_planner/src/service/api/dio/custom_dio.dart';
 import 'package:edu_planner/src/service/api/dio/secure_storage.dart';
+import 'package:edu_planner/src/service/api/models/login_request/login_request.dart';
 import 'package:edu_planner/src/service/api/models/register_request/register_request.dart';
 import 'package:edu_planner/src/service/di/di.dart';
 import 'package:edu_planner/src/service/navigation/navigation_service.dart';
@@ -29,26 +30,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await event.when(
         login: (username, password) async {
           emit(state.copyWith(isLoading: true));
-          final result = await apiProvider.userLogin(
-              RegisterRequest(username: username, password: password));
+          final result =
+              await apiProvider.userLogin(LoginRequest(username: username, password: password));
           _storage.setAccess(result.token);
           _storage.setRole(result.user.role);
           print(result);
           emit(state.copyWith(isLoading: false));
           NavigationService.context.push(RoutingConstants.home);
-          if(_storage.getAccess()!=null){
+          if (_storage.getAccess() != null) {
             NavigationService.context.push(RoutingConstants.home);
           }
         },
-        register: (username, password) async {
+        register: (username, password, region, classId, school) async {
           emit(state.copyWith(isLoading: true));
           final result = await apiProvider.userRegister(
-              RegisterRequest(username: username, password: password));
+            RegisterRequest(
+              username: username,
+              password: password,
+              schoolId: school,
+              regionId: region,
+              classId: classId,
+              fullName: username,
+            ),
+          );
           _storage.setAccess(result.token);
           _storage.setRole(result.user.role);
           print(result);
           emit(state.copyWith(isLoading: false));
-          if(_storage.getAccess()!=null){
+          if (_storage.getAccess() != null) {
             NavigationService.context.push(RoutingConstants.home);
           }
         },

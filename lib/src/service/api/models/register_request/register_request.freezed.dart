@@ -20,8 +20,18 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RegisterRequest {
+  @JsonKey(name: "username")
   String get username => throw _privateConstructorUsedError;
+  @JsonKey(name: "password")
   String get password => throw _privateConstructorUsedError;
+  @JsonKey(name: "full_name")
+  String get fullName => throw _privateConstructorUsedError;
+  @JsonKey(name: "region_id")
+  String get regionId => throw _privateConstructorUsedError;
+  @JsonKey(name: "school_id")
+  String get schoolId => throw _privateConstructorUsedError;
+  @JsonKey(name: "class_id")
+  String get classId => throw _privateConstructorUsedError;
 
   /// Serializes this RegisterRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +49,13 @@ abstract class $RegisterRequestCopyWith<$Res> {
           RegisterRequest value, $Res Function(RegisterRequest) then) =
       _$RegisterRequestCopyWithImpl<$Res, RegisterRequest>;
   @useResult
-  $Res call({String username, String password});
+  $Res call(
+      {@JsonKey(name: "username") String username,
+      @JsonKey(name: "password") String password,
+      @JsonKey(name: "full_name") String fullName,
+      @JsonKey(name: "region_id") String regionId,
+      @JsonKey(name: "school_id") String schoolId,
+      @JsonKey(name: "class_id") String classId});
 }
 
 /// @nodoc
@@ -59,6 +75,10 @@ class _$RegisterRequestCopyWithImpl<$Res, $Val extends RegisterRequest>
   $Res call({
     Object? username = null,
     Object? password = null,
+    Object? fullName = null,
+    Object? regionId = null,
+    Object? schoolId = null,
+    Object? classId = null,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -68,6 +88,22 @@ class _$RegisterRequestCopyWithImpl<$Res, $Val extends RegisterRequest>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      regionId: null == regionId
+          ? _value.regionId
+          : regionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      schoolId: null == schoolId
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as String,
+      classId: null == classId
+          ? _value.classId
+          : classId // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -81,7 +117,13 @@ abstract class _$$RegisterRequestImplCopyWith<$Res>
       __$$RegisterRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String username, String password});
+  $Res call(
+      {@JsonKey(name: "username") String username,
+      @JsonKey(name: "password") String password,
+      @JsonKey(name: "full_name") String fullName,
+      @JsonKey(name: "region_id") String regionId,
+      @JsonKey(name: "school_id") String schoolId,
+      @JsonKey(name: "class_id") String classId});
 }
 
 /// @nodoc
@@ -99,6 +141,10 @@ class __$$RegisterRequestImplCopyWithImpl<$Res>
   $Res call({
     Object? username = null,
     Object? password = null,
+    Object? fullName = null,
+    Object? regionId = null,
+    Object? schoolId = null,
+    Object? classId = null,
   }) {
     return _then(_$RegisterRequestImpl(
       username: null == username
@@ -109,6 +155,22 @@ class __$$RegisterRequestImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      regionId: null == regionId
+          ? _value.regionId
+          : regionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      schoolId: null == schoolId
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as String,
+      classId: null == classId
+          ? _value.classId
+          : classId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -116,19 +178,39 @@ class __$$RegisterRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$RegisterRequestImpl implements _RegisterRequest {
-  _$RegisterRequestImpl({required this.username, required this.password});
+  const _$RegisterRequestImpl(
+      {@JsonKey(name: "username") required this.username,
+      @JsonKey(name: "password") required this.password,
+      @JsonKey(name: "full_name") required this.fullName,
+      @JsonKey(name: "region_id") required this.regionId,
+      @JsonKey(name: "school_id") required this.schoolId,
+      @JsonKey(name: "class_id") required this.classId});
 
   factory _$RegisterRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$RegisterRequestImplFromJson(json);
 
   @override
+  @JsonKey(name: "username")
   final String username;
   @override
+  @JsonKey(name: "password")
   final String password;
+  @override
+  @JsonKey(name: "full_name")
+  final String fullName;
+  @override
+  @JsonKey(name: "region_id")
+  final String regionId;
+  @override
+  @JsonKey(name: "school_id")
+  final String schoolId;
+  @override
+  @JsonKey(name: "class_id")
+  final String classId;
 
   @override
   String toString() {
-    return 'RegisterRequest(username: $username, password: $password)';
+    return 'RegisterRequest(username: $username, password: $password, fullName: $fullName, regionId: $regionId, schoolId: $schoolId, classId: $classId)';
   }
 
   @override
@@ -139,12 +221,20 @@ class _$RegisterRequestImpl implements _RegisterRequest {
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.regionId, regionId) ||
+                other.regionId == regionId) &&
+            (identical(other.schoolId, schoolId) ||
+                other.schoolId == schoolId) &&
+            (identical(other.classId, classId) || other.classId == classId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, username, password);
+  int get hashCode => Object.hash(
+      runtimeType, username, password, fullName, regionId, schoolId, classId);
 
   /// Create a copy of RegisterRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -164,17 +254,36 @@ class _$RegisterRequestImpl implements _RegisterRequest {
 }
 
 abstract class _RegisterRequest implements RegisterRequest {
-  factory _RegisterRequest(
-      {required final String username,
-      required final String password}) = _$RegisterRequestImpl;
+  const factory _RegisterRequest(
+          {@JsonKey(name: "username") required final String username,
+          @JsonKey(name: "password") required final String password,
+          @JsonKey(name: "full_name") required final String fullName,
+          @JsonKey(name: "region_id") required final String regionId,
+          @JsonKey(name: "school_id") required final String schoolId,
+          @JsonKey(name: "class_id") required final String classId}) =
+      _$RegisterRequestImpl;
 
   factory _RegisterRequest.fromJson(Map<String, dynamic> json) =
       _$RegisterRequestImpl.fromJson;
 
   @override
+  @JsonKey(name: "username")
   String get username;
   @override
+  @JsonKey(name: "password")
   String get password;
+  @override
+  @JsonKey(name: "full_name")
+  String get fullName;
+  @override
+  @JsonKey(name: "region_id")
+  String get regionId;
+  @override
+  @JsonKey(name: "school_id")
+  String get schoolId;
+  @override
+  @JsonKey(name: "class_id")
+  String get classId;
 
   /// Create a copy of RegisterRequest
   /// with the given fields replaced by the non-null parameter values.

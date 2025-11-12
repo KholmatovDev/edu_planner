@@ -4,8 +4,8 @@ part of 'regions_bloc.dart';
 class RegionsState with _$RegionsState {
   const factory RegionsState.initial({
     required bool isLoading,
-    required bool isSchool,
-    required bool isClass,
+    required bool isSchoolLoading,
+    required bool isClassLoading,
     //Schools
     SchoolsResponse? schools,
     String? selectedSchool,
@@ -15,7 +15,7 @@ class RegionsState with _$RegionsState {
     String? selectedRegionName,
     String? selectedRegion,
     //Classes
-    ClassesResponse? Classes,
+    ClassesResponse? classes,
     String? selectedClassName,
     String? selectedClass,
   }) = _Initial;

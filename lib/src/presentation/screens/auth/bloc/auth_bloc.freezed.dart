@@ -20,19 +20,25 @@ mixin _$AuthEvent {
   String get password => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String username, String password) register,
+    required TResult Function(String username, String password, String regionId,
+            String schoolId, String classId)
+        register,
     required TResult Function(String username, String password) login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String username, String password)? register,
+    TResult? Function(String username, String password, String regionId,
+            String schoolId, String classId)?
+        register,
     TResult? Function(String username, String password)? login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String username, String password)? register,
+    TResult Function(String username, String password, String regionId,
+            String schoolId, String classId)?
+        register,
     TResult Function(String username, String password)? login,
     required TResult orElse(),
   }) =>
@@ -111,7 +117,12 @@ abstract class _$$RegisterImplCopyWith<$Res>
       __$$RegisterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String username, String password});
+  $Res call(
+      {String username,
+      String password,
+      String regionId,
+      String schoolId,
+      String classId});
 }
 
 /// @nodoc
@@ -129,6 +140,9 @@ class __$$RegisterImplCopyWithImpl<$Res>
   $Res call({
     Object? username = null,
     Object? password = null,
+    Object? regionId = null,
+    Object? schoolId = null,
+    Object? classId = null,
   }) {
     return _then(_$RegisterImpl(
       username: null == username
@@ -139,6 +153,18 @@ class __$$RegisterImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      regionId: null == regionId
+          ? _value.regionId
+          : regionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      schoolId: null == schoolId
+          ? _value.schoolId
+          : schoolId // ignore: cast_nullable_to_non_nullable
+              as String,
+      classId: null == classId
+          ? _value.classId
+          : classId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -146,16 +172,27 @@ class __$$RegisterImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RegisterImpl implements _Register {
-  const _$RegisterImpl({required this.username, required this.password});
+  const _$RegisterImpl(
+      {required this.username,
+      required this.password,
+      required this.regionId,
+      required this.schoolId,
+      required this.classId});
 
   @override
   final String username;
   @override
   final String password;
+  @override
+  final String regionId;
+  @override
+  final String schoolId;
+  @override
+  final String classId;
 
   @override
   String toString() {
-    return 'AuthEvent.register(username: $username, password: $password)';
+    return 'AuthEvent.register(username: $username, password: $password, regionId: $regionId, schoolId: $schoolId, classId: $classId)';
   }
 
   @override
@@ -166,11 +203,17 @@ class _$RegisterImpl implements _Register {
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.regionId, regionId) ||
+                other.regionId == regionId) &&
+            (identical(other.schoolId, schoolId) ||
+                other.schoolId == schoolId) &&
+            (identical(other.classId, classId) || other.classId == classId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username, password);
+  int get hashCode =>
+      Object.hash(runtimeType, username, password, regionId, schoolId, classId);
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -183,30 +226,36 @@ class _$RegisterImpl implements _Register {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String username, String password) register,
+    required TResult Function(String username, String password, String regionId,
+            String schoolId, String classId)
+        register,
     required TResult Function(String username, String password) login,
   }) {
-    return register(username, password);
+    return register(username, password, regionId, schoolId, classId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String username, String password)? register,
+    TResult? Function(String username, String password, String regionId,
+            String schoolId, String classId)?
+        register,
     TResult? Function(String username, String password)? login,
   }) {
-    return register?.call(username, password);
+    return register?.call(username, password, regionId, schoolId, classId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String username, String password)? register,
+    TResult Function(String username, String password, String regionId,
+            String schoolId, String classId)?
+        register,
     TResult Function(String username, String password)? login,
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(username, password);
+      return register(username, password, regionId, schoolId, classId);
     }
     return orElse();
   }
@@ -246,12 +295,18 @@ class _$RegisterImpl implements _Register {
 abstract class _Register implements AuthEvent {
   const factory _Register(
       {required final String username,
-      required final String password}) = _$RegisterImpl;
+      required final String password,
+      required final String regionId,
+      required final String schoolId,
+      required final String classId}) = _$RegisterImpl;
 
   @override
   String get username;
   @override
   String get password;
+  String get regionId;
+  String get schoolId;
+  String get classId;
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -340,7 +395,9 @@ class _$LoginImpl implements _Login {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String username, String password) register,
+    required TResult Function(String username, String password, String regionId,
+            String schoolId, String classId)
+        register,
     required TResult Function(String username, String password) login,
   }) {
     return login(username, password);
@@ -349,7 +406,9 @@ class _$LoginImpl implements _Login {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String username, String password)? register,
+    TResult? Function(String username, String password, String regionId,
+            String schoolId, String classId)?
+        register,
     TResult? Function(String username, String password)? login,
   }) {
     return login?.call(username, password);
@@ -358,7 +417,9 @@ class _$LoginImpl implements _Login {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String username, String password)? register,
+    TResult Function(String username, String password, String regionId,
+            String schoolId, String classId)?
+        register,
     TResult Function(String username, String password)? login,
     required TResult orElse(),
   }) {

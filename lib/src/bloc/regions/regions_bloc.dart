@@ -13,7 +13,7 @@ part 'regions_state.dart';
 part 'regions_bloc.freezed.dart';
 
 class RegionsBloc extends Bloc<RegionsEvent, RegionsState> {
-  RegionsBloc() : super(const RegionsState.initial(isLoading: false)) {
+  RegionsBloc() : super(const RegionsState.initial(isLoading: false,isClassLoading: false,isSchoolLoading: false)) {
     on<RegionsEvent>((event, emit) async {
       final _apiProvider = locator.get<ApiProvider>();
       await event.when(
@@ -33,21 +33,25 @@ class RegionsBloc extends Bloc<RegionsEvent, RegionsState> {
 
         //Schools
         getSchools: () async{
-          emit(state.copyWith(isLoading: true,selectedSchool: null,selectedSchoolName: null));
+          emit(state.copyWith(isSchoolLoading: true,selectedSchool: null,selectedSchoolName: null));
           final response = await _apiProvider.getSchools(state.selectedRegion??"");
-          emit(state.copyWith(schools: response,isLoading: false));
+          emit(state.copyWith(schools: response,isSchoolLoading: false));
         },
         setSchool: (name) {
-          final school = state.schools!.schools.firstWhere((element) => element.name == name,);
+          final school = state.schools!.schools.firstWhere((element) => element.name == name);
+          add(RegionsEvent.getClasses());
           emit(state.copyWith(selectedSchool: school.id,selectedSchoolName: school.name));
         },
 
         //Classes
         getClasses: () async{
-
+          emit(state.copyWith(isClassLoading: true,classes: null,selectedClass: null, selectedClassName: null));
+          final response = await _apiProvider.getClasses(state.selectedSchool??"");
+          emit(state.copyWith(classes: response, isClassLoading: false));
         },
         setClass: (name) {
-
+          final selectedClass = state.classes?.classes.firstWhere((element) => element.name == name,);
+          emit(state.copyWith(selectedClass: selectedClass!.id,selectedClassName: selectedClass.name));
         },
       );
     });

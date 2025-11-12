@@ -6,6 +6,7 @@ import 'package:edu_planner/src/service/api/models/user_profile_request/user_pro
 import 'package:edu_planner/src/service/api/models/user_profile_response/user_profile_response.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../models/login_request/login_request.dart';
 import '../models/my_schedules/schedules_response.dart';
 import '../models/register_request/register_request.dart';
 import '../models/register_response/auth_response.dart';
@@ -22,7 +23,7 @@ abstract class ApiProvider {
   Future<AuthResponse> userRegister(@Body() RegisterRequest register);
 
   @POST("/auth/login")
-  Future<AuthResponse> userLogin(@Body() RegisterRequest register);
+  Future<AuthResponse> userLogin(@Body() LoginRequest register);
 
   @PUT("/users/profile")
   Future<UserProfileResponse> setUserProfile(@Body() UserProfileRequest request);

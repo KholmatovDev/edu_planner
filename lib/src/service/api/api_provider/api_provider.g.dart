@@ -57,7 +57,7 @@ class _ApiProvider implements ApiProvider {
   }
 
   @override
-  Future<AuthResponse> userLogin(RegisterRequest register) async {
+  Future<AuthResponse> userLogin(LoginRequest register) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
